@@ -1,0 +1,114 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach by Process ID",
+      "processId": "${command:PickProcess}",
+      // "port": 9000,
+      // "address": "localhost",
+      // "resolveSourceMapLocations": [
+      //   "${workspaceFolder}/**/",
+      //   "!**/node_modules/**"
+      // ],
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "pwa-node",
+      "sourceMaps": true,
+      // "trace" : true,
+      // "localRoot": "${workspaceFolder}",
+      // "outFiles": [
+      //   "${workspaceFolder}/dist/**/*.js"
+      // ]
+    },
+    // {
+    //   "name": "Launch Program",
+    //   "program": "${workspaceFolder}/dist/index.js",
+    //   "request": "launch",
+    //   "skipFiles": [
+    //     "<node_internals>/**"
+    //   ],
+    //   "type": "node"
+    // },
+    {
+      "type": "fabric:node",
+      "request": "launch",
+      "name": "Debug Smart Contract simple"
+    },
+    {
+      // OPT1
+      "type": "fabric:node",
+      "request": "launch",
+      "name": "Debug Smart Contract Try",
+      "env": {
+        "CORE_CHAINCODE_ID_NAME": "myasset:0.0.1",
+        "FABRIC_LOGGING_SPEC": "chaincode=debug",
+        "CORE_PEER_CHAINCODELISTENADDRESS": "127.0.0.1:7052"
+      },
+      "program": "${workspaceFolder}/node_modules/.bin/fabric-chaincode-node",
+      "args": [
+        "--peer-chaincodedev=true",
+        "--chaincode-id-name=myasset:0.0.1"
+      ],
+      "sourceMaps": true,
+      "outFiles": [
+        // "${workspaceFolder}/dist/**/*.js"
+        "${workspaceFolder}/**/*.js"
+      ]
+      // OPT2
+      // "type": "fabric:node",
+      // "request": "launch",
+      // "name": "Debug Smart Contract",
+      // "program": "${workspaceFolder}/node_modules/fabric-shim/cli",
+      // "outFiles": [
+      //   // "${workspaceFolder}/dist/**/*.js"
+      //   "${workspaceFolder}/**/*.js"
+      // ]
+      // "args": [
+      //   "--peer-chaincodedev=true"
+      // ],
+      // "program": "${workspaceFolder}/dist/my-asset-contract.js",
+      // "outFiles": [
+      //   "${workspaceFolder}/**/*.js"
+      // ],
+      // "program": "${workspaceFolder}/src/my-asset-contract.ts",
+      // "program": "${workspaceFolder}/node_modules/fabric-shim/cli",
+      // "sourceMaps": false,
+      // "outFiles": [
+      //   // "${workspaceFolder}/dist/**/*.js"
+      //   "${workspaceFolder}/**/*.js"
+      // ]
+    },
+    {
+      "name": "Debug Chaincode",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/fabric-chaincode-node",
+      "args": [
+        "start",
+        "dist/my-asset-contract.js",
+        "--peer.address",
+        "127.0.0.1:7052",
+      ],
+      "env": {
+        "CORE_CHAINCODE_LOGLEVEL": "debug",
+        "CORE_PEER_TLS_ENABLED": "false",
+        "CORE_CHAINCODE_ID_NAME": "myasset:0.0.1"
+      },
+      "cwd": "${workspaceFolder}",
+      "protocol": "auto",
+      "disableOptimisticBPs": true,
+      "sourceMaps": true,
+      "smartStep": true,
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+    },
+  ],
+}
